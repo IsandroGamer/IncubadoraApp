@@ -8,10 +8,8 @@ using IncubadoraApp.Models; // Importação dos modelos de dados do projeto (Mod
 
 namespace IncubadoraApp.Views;
 
-/// <summary>
 /// View principal do sistema. Gerencia a exibição dos dados da incubadora,
 /// alertas ativos, estado das fases e informações do utilizador logado.
-/// </summary>
 public partial class MainView : UserControl
 {
     // ==========================================
@@ -35,18 +33,18 @@ public partial class MainView : UserControl
     // CONSTRUTORES DE INICIALIZAÇÃO
     // ==========================================
 
-    /// <summary>
+    
     /// Construtor padrão (exigido pelo designer de XAML do Avalonia e para testes simples)
-    /// </summary>
+    
     public MainView()
     {
         InitializeComponent();
         InicializarDados(string.Empty); // Inicializa com nome de utilizador vazio
     }
 
-    /// <summary>
+ 
     /// Construtor principal chamado após o login bem-sucedido
-    /// </summary>
+   
     /// <param name="usuario">Nome do utilizador recebido da tela de Login</param>
     public MainView(string usuario)
     {
@@ -58,11 +56,11 @@ public partial class MainView : UserControl
     // MÉTODOS DE CONFIGURAÇÃO E DADOS
     // ==========================================
 
-    /// <summary>
+
     /// Carrega e estrutura os dados iniciais do sistema (MockData para simulação)
     /// e vincula os eventos de clique dos botões da tela.
-    /// </summary>
-    private void InicializarDados(string usuario)
+    /// 
+       private void InicializarDados(string usuario)
     {
         // 1. Instancia o utilizador atual com dados padrão de teste
         UsuarioAtual = new ModelUtilizador
@@ -142,9 +140,9 @@ public partial class MainView : UserControl
     // RENDERIZAÇÃO DA INTERFACE (UI)
     // ==========================================
 
-    /// <summary>
+    
     /// Lê as propriedades da classe e renderiza visualmente os componentes no layout Avalonia.
-    /// </summary>
+   
     private void AtualizarInterface()
     {
         // Busca os componentes de texto estáticos declarados no XAML
@@ -252,23 +250,23 @@ public partial class MainView : UserControl
     // TRATADORES DE EVENTOS DE BOTÃO (ACTIONS)
     // ==========================================
 
-    /// <summary>
+    
     /// Trata a ação de alteração de fase de incubação no sistema
-    /// </summary>
+    
     private void OnAlterarFaseClicked(object? sender, RoutedEventArgs e)
     {
         // Simula a transição de fase atual para a fase de eclosão
         FaseAtual.Tipo = "eclosao";
         FaseAtual.Nome = "Eclodimento Final";
         FaseAtual.Estado = "ativa";
-        
+
         // Recarrega os componentes visuais para aplicar as mudanças de estado
         AtualizarInterface();
     }
 
-    /// <summary>
+    
     /// Executa o diagnóstico sob demanda do sistema
-    /// </summary>
+    
     private void OnExecutarDiagnosticoClicked(object? sender, RoutedEventArgs e)
     {
         // Simula atualização no modelo de diagnóstico
@@ -279,17 +277,17 @@ public partial class MainView : UserControl
         AtualizarInterface();
     }
 
-    /// <summary>
+    
     /// Reservado para alternar entre modos de operação da incubadora (ex: Manual / Automático)
-    /// </summary>
-    private void OnAlternarModoClicked(object? sender, RoutedEventArgs e) 
-    { 
+    
+    private void OnAlternarModoClicked(object? sender, RoutedEventArgs e)
+    {
         // A implementar conforme a lógica dos atuadores do ESP32
     }
 
-    /// <summary>
+    
     /// Desconecta o utilizador atual e retorna à tela de Login
-    /// </summary>
+   
     private void OnSairClicked(object? sender, RoutedEventArgs e)
     {
         // Obtém a janela principal que está a conter a MainView atual

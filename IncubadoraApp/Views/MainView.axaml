@@ -4,37 +4,22 @@
              Background="#F4F6F9">
 
     <ScrollViewer Padding="15">
-
         <StackPanel Spacing="15">
 
+            <!-- Cabeçalho com dados do Utilizador e Ações -->
             <Border Background="#1E293B"
                     CornerRadius="10"
                     Padding="15">
-
-                <Grid ColumnDefinitions="*,Auto">
-
-                    <StackPanel Grid.Column="0"
-                                Spacing="2">
-
-                        <TextBlock Text="Sistema de Incubação"
+                <Grid ColumnDefinitions="*,Auto,Auto">
+                    <StackPanel Grid.Column="0" Spacing="2">
+                        <TextBlock Text="Sistema de Incubação Inteligente"
                                    Foreground="#94A3B8"
                                    FontSize="12"/>
-
                         <TextBlock x:Name="LblNomeUsuario"
-                                   Text="Avicultor: Carregando..."
+                                   Text="Carregando..."
                                    Foreground="White"
                                    FontSize="18"
                                    FontWeight="Bold"/>
-
-                        <!-- Botão de Sair no cabeçalho ou topo da MainView -->
-                        <Button x:Name="BtnSair"
-                                Content="Sair da Conta"
-                                Background="#EF4444"
-                                Foreground="White"
-                                FontWeight="Bold"
-                                Padding="10,6"
-                                CornerRadius="6"
-                                HorizontalAlignment="Right"/>
                     </StackPanel>
 
                     <Button Grid.Column="1"
@@ -42,111 +27,73 @@
                             Content="Alternar Modo"
                             Background="#334155"
                             Foreground="White"
-                            FontSize="12"/>
+                            FontSize="12"
+                            Margin="0,0,10,0"/>
 
+                    <Button Grid.Column="2"
+                            x:Name="BtnSair"
+                            Content="Sair"
+                            Background="#EF4444"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Padding="10,6"
+                            CornerRadius="6"/>
                 </Grid>
-
             </Border>
 
-
-            <Grid ColumnDefinitions="*,*"
-                  Margin="0,5">
-
-                <Border Grid.Column="0"
-                        Background="White"
-                        CornerRadius="8"
-                        Padding="12"
-                        Margin="0,0,5,0">
-
-                    <StackPanel Spacing="5">
-
-                        <TextBlock Text="Fase Atual"
-                                   Foreground="#64748B"
-                                   FontSize="12"/>
-
-                        <TextBlock x:Name="LblFaseNome"
-                                   Text="Fase 1"
-                                   FontSize="16"
-                                   FontWeight="Bold"
-                                   Foreground="#0F172A"/>
-
-                        <TextBlock x:Name="LblFaseEstado"
-                                   Text="Estado: Em Andamento"
-                                   FontSize="11"
-                                   Foreground="#16A34A"/>
-
-                        <Button x:Name="BtnAlterarFase"
-                                Content="Alterar Fase"
-                                Margin="0,5,0,0"
-                                Height="35"
-                                FontSize="11"
-                                Background="#2563EB"
-                                Foreground="White"/>
-
+            <!-- Painel de Telemetria Atual (Sensores do ESP32) -->
+            <Grid ColumnDefinitions="*,*,*" Margin="0,5">
+                <Border Grid.Column="0" Background="White" CornerRadius="8" Padding="12" Margin="0,0,5,0">
+                    <StackPanel Spacing="3">
+                        <TextBlock Text="Temperatura" Foreground="#64748B" FontSize="12"/>
+                        <TextBlock x:Name="LblTemperatura" Text="--.- °C" FontSize="18" FontWeight="Bold" Foreground="#E11D48"/>
                     </StackPanel>
-
                 </Border>
 
-
-                <Border Grid.Column="1"
-                        Background="White"
-                        CornerRadius="8"
-                        Padding="12"
-                        Margin="5,0,0,0">
-
-                    <StackPanel Spacing="5">
-
-                        <TextBlock Text="Último Diagnóstico"
-                                   Foreground="#64748B"
-                                   FontSize="12"/>
-
-                        <TextBlock x:Name="LblDiagnosticoResultado"
-                                   Text="Normal"
-                                   FontSize="16"
-                                   FontWeight="Bold"
-                                   Foreground="#0F172A"/>
-
-                        <TextBlock x:Name="LblDiagnosticoConfianca"
-                                   Text="Confiança: 98%"
-                                   FontSize="11"
-                                   Foreground="#64748B"/>
-
-                        <Button x:Name="BtnExecutarDiagnostico"
-                                Content="Executar Análise"
-                                Margin="0,5,0,0"
-                                Height="35"
-                                FontSize="11"
-                                Background="#0D9488"
-                                Foreground="White"/>
-
+                <Border Grid.Column="1" Background="White" CornerRadius="8" Padding="12" Margin="2,0,2,0">
+                    <StackPanel Spacing="3">
+                        <TextBlock Text="Humidade" Foreground="#64748B" FontSize="12"/>
+                        <TextBlock x:Name="LblHumidade" Text="--.- %" FontSize="18" FontWeight="Bold" Foreground="#0284C7"/>
                     </StackPanel>
-
                 </Border>
 
+                <Border Grid.Column="2" Background="White" CornerRadius="8" Padding="12" Margin="5,0,0,0">
+                    <StackPanel Spacing="3">
+                        <TextBlock Text="Viragem" Foreground="#64748B" FontSize="12"/>
+                        <TextBlock x:Name="LblRotacao" Text="Inativa" FontSize="14" FontWeight="Bold" Foreground="#D97706"/>
+                    </StackPanel>
+                </Border>
             </Grid>
 
+            <!-- Seção de Fase Atual e Diagnóstico -->
+            <Grid ColumnDefinitions="*,*" Margin="0,5">
+                <Border Grid.Column="0" Background="White" CornerRadius="8" Padding="12" Margin="0,0,5,0">
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Fase Atual" Foreground="#64748B" FontSize="12"/>
+                        <TextBlock x:Name="LblFaseNome" Text="A carregar..." FontSize="16" FontWeight="Bold" Foreground="#0F172A"/>
+                        <TextBlock x:Name="LblFaseEstado" Text="Estado: Sem dados" FontSize="11" Foreground="#16A34A"/>
+                        <Button x:Name="BtnAlterarFase" Content="Alterar Fase" Margin="0,5,0,0" Height="32" FontSize="11" Background="#2563EB" Foreground="White"/>
+                    </StackPanel>
+                </Border>
 
-            <TextBlock Text="Dispositivos Configurados"
-                       FontSize="16"
-                       FontWeight="Bold"
-                       Foreground="#334155"/>
+                <Border Grid.Column="1" Background="White" CornerRadius="8" Padding="12" Margin="5,0,0,0">
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Último Diagnóstico" Foreground="#64748B" FontSize="12"/>
+                        <TextBlock x:Name="LblDiagnosticoResultado" Text="A carregar..." FontSize="16" FontWeight="Bold" Foreground="#0F172A"/>
+                        <TextBlock x:Name="LblDiagnosticoConfianca" Text="Confiança: --%" FontSize="11" Foreground="#64748B"/>
+                        <Button x:Name="BtnExecutarDiagnostico" Content="Executar Análise" Margin="0,5,0,0" Height="32" FontSize="11" Background="#0D9488" Foreground="White"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
 
-            <ListBox x:Name="ListaDispositivos"
-                     Height="140"
-                     Background="Transparent"/>
+            <!-- Dispositivos Vinculados -->
+            <TextBlock Text="Dispositivos Configurados" FontSize="16" FontWeight="Bold" Foreground="#334155"/>
+            <ListBox x:Name="ListaDispositivos" Height="120" Background="White" CornerRadius="8"/>
 
-
-            <TextBlock Text="Alertas Recentes"
-                       FontSize="16"
-                       FontWeight="Bold"
-                       Foreground="#334155"/>
-
-            <ListBox x:Name="ListaAlertas"
-                     Height="150"
-                     Background="Transparent"/>
+            <!-- Lista de Alertas Ativos -->
+            <TextBlock Text="Alertas Recentes" FontSize="16" FontWeight="Bold" Foreground="#334155"/>
+            <ListBox x:Name="ListaAlertas" Height="130" Background="White" CornerRadius="8"/>
 
         </StackPanel>
-
     </ScrollViewer>
-
 </UserControl>
