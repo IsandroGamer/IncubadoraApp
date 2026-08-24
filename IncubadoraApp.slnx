@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="IncubadoraApp.Android/IncubadoraApp.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="IncubadoraApp.Browser/IncubadoraApp.Browser.csproj" />
+  <Project Path="IncubadoraApp.Desktop/IncubadoraApp.Desktop.csproj" />
+  <Project Path="IncubadoraApp.iOS/IncubadoraApp.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="IncubadoraApp/IncubadoraApp.csproj" />
+</Solution>

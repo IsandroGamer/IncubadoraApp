@@ -1,0 +1,78 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="IncubadoraApp.Views.LoginView"
+             x:CompileBindings="False"
+             Background="#0F172A">
+
+
+
+
+    <!-- Grid principal dividido em 2 colunas -->
+    <Grid ColumnDefinitions="*, *">
+        <!-- LADO ESQUERDO: Imagem  -->
+        <Border Grid.Column="0" Background="#F1F5F9" Padding="40">
+            <Image Source="avares://IncubadoraApp/Assets/logo123.jpg"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- LADO DIREITO: O seu cartão de Login original -->
+        <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border Background="White"
+                    CornerRadius="12"
+                    Padding="30"
+                    Width="350"
+                    BoxShadow="0 10 25 0 #20000000">
+
+                <StackPanel Spacing="15">
+                    <!-- Título -->
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="SIIA" FontSize="22" FontWeight="Bold" Foreground="#1E293B" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Aceda à sua conta de avicultor" FontSize="12" Foreground="#64748B" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Mensagem de Erro (Invisível por padrão) -->
+                    <TextBlock x:Name="LblErro"
+                               Foreground="#DC2626"
+                               FontSize="12"
+                               HorizontalAlignment="Center"
+                               IsVisible="False"
+                               TextWrapping="Wrap"/>
+
+                    <!-- Campo Utilizador/Email -->
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Utilizador ou Email" FontSize="12" Foreground="#334155" FontWeight="SemiBold"/>
+                        <TextBox x:Name="TxtUsuario"
+                                 Watermark ="Ex: manuel.silva"
+                                 Padding="10"
+                                 CornerRadius="6"/>
+                    </StackPanel>
+
+                    <!-- Campo Palavra-passe -->
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Palavra-passe" FontSize="12" Foreground="#334155" FontWeight="SemiBold"/>
+                        <TextBox x:Name="TxtSenha"
+                                 PasswordChar="•"
+                                 Watermark ="••••••••"
+                                 Padding="10"
+                                 CornerRadius="6"/>
+                    </StackPanel>
+
+                    <!-- Botão de Entrar -->
+                    <Button x:Name="BtnEntrar"
+                            Content="Entrar no Sistema"
+                            Click="OnBtnEntrarClicked"
+                            Background="#2563EB"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Padding="12"
+                            Margin="0,10,0,0"
+                            CornerRadius="6"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

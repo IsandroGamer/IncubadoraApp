@@ -1,0 +1,152 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="IncubadoraApp.Views.MainView"
+             Background="#F4F6F9">
+
+    <ScrollViewer Padding="15">
+
+        <StackPanel Spacing="15">
+
+            <Border Background="#1E293B"
+                    CornerRadius="10"
+                    Padding="15">
+
+                <Grid ColumnDefinitions="*,Auto">
+
+                    <StackPanel Grid.Column="0"
+                                Spacing="2">
+
+                        <TextBlock Text="Sistema de Incubação"
+                                   Foreground="#94A3B8"
+                                   FontSize="12"/>
+
+                        <TextBlock x:Name="LblNomeUsuario"
+                                   Text="Avicultor: Carregando..."
+                                   Foreground="White"
+                                   FontSize="18"
+                                   FontWeight="Bold"/>
+
+                        <!-- Botão de Sair no cabeçalho ou topo da MainView -->
+                        <Button x:Name="BtnSair"
+                                Content="Sair da Conta"
+                                Background="#EF4444"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                Padding="10,6"
+                                CornerRadius="6"
+                                HorizontalAlignment="Right"/>
+                    </StackPanel>
+
+                    <Button Grid.Column="1"
+                            x:Name="BtnAlternarModo"
+                            Content="Alternar Modo"
+                            Background="#334155"
+                            Foreground="White"
+                            FontSize="12"/>
+
+                </Grid>
+
+            </Border>
+
+
+            <Grid ColumnDefinitions="*,*"
+                  Margin="0,5">
+
+                <Border Grid.Column="0"
+                        Background="White"
+                        CornerRadius="8"
+                        Padding="12"
+                        Margin="0,0,5,0">
+
+                    <StackPanel Spacing="5">
+
+                        <TextBlock Text="Fase Atual"
+                                   Foreground="#64748B"
+                                   FontSize="12"/>
+
+                        <TextBlock x:Name="LblFaseNome"
+                                   Text="Fase 1"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#0F172A"/>
+
+                        <TextBlock x:Name="LblFaseEstado"
+                                   Text="Estado: Em Andamento"
+                                   FontSize="11"
+                                   Foreground="#16A34A"/>
+
+                        <Button x:Name="BtnAlterarFase"
+                                Content="Alterar Fase"
+                                Margin="0,5,0,0"
+                                Height="35"
+                                FontSize="11"
+                                Background="#2563EB"
+                                Foreground="White"/>
+
+                    </StackPanel>
+
+                </Border>
+
+
+                <Border Grid.Column="1"
+                        Background="White"
+                        CornerRadius="8"
+                        Padding="12"
+                        Margin="5,0,0,0">
+
+                    <StackPanel Spacing="5">
+
+                        <TextBlock Text="Último Diagnóstico"
+                                   Foreground="#64748B"
+                                   FontSize="12"/>
+
+                        <TextBlock x:Name="LblDiagnosticoResultado"
+                                   Text="Normal"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#0F172A"/>
+
+                        <TextBlock x:Name="LblDiagnosticoConfianca"
+                                   Text="Confiança: 98%"
+                                   FontSize="11"
+                                   Foreground="#64748B"/>
+
+                        <Button x:Name="BtnExecutarDiagnostico"
+                                Content="Executar Análise"
+                                Margin="0,5,0,0"
+                                Height="35"
+                                FontSize="11"
+                                Background="#0D9488"
+                                Foreground="White"/>
+
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+
+
+            <TextBlock Text="Dispositivos Configurados"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="#334155"/>
+
+            <ListBox x:Name="ListaDispositivos"
+                     Height="140"
+                     Background="Transparent"/>
+
+
+            <TextBlock Text="Alertas Recentes"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="#334155"/>
+
+            <ListBox x:Name="ListaAlertas"
+                     Height="150"
+                     Background="Transparent"/>
+
+        </StackPanel>
+
+    </ScrollViewer>
+
+</UserControl>
