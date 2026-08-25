@@ -1,91 +1,104 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
 using MySql.Data.MySqlClient;
-using System;
 
-namespace IncubadoraApp.Views
+namespace IncubadoraApp.Views;
+
+public partial class LoginView : UserControl
 {
-    public partial class LoginView : UserControl
+    private const string ConexaoString = "Server=192.168.1.213;Database=incubadora_db;Uid=root;Pwd=IsaKellY1971;SslMode=Disabled;AllowPublicKeyRetrieval=True;";
+
+    public LoginView()
     {
-        public LoginView()
+        InitializeComponent();
+    }
+
+    private void InitializeComponent()
+    {
+        AvaloniaXamlLoader.Load(this);
+
+        var btnEntrar = this.FindControl<Button>("BtnEntrar");
+        if (btnEntrar != null)
         {
-            InitializeComponent();
+            btnEntrar.Click += OnBtnEntrarClicked;
+        }
+    }
+
+    private void OnBtnEntrarClicked(object? sender, RoutedEventArgs e)
+    {
+        var txtUsuario = this.FindControl<TextBox>("TxtUsuario");
+        var txtSenha = this.FindControl<TextBox>("TxtSenha");
+        var lblErro = this.FindControl<TextBlock>("LblErro");
+
+        string usuario = txtUsuario?.Text?.Trim() ?? string.Empty;
+        string senha = txtSenha?.Text ?? string.Empty;
+
+        if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(senha))
+        {
+            ExibirErro(lblErro, "Preencha todos os campos para continuar.");
+            return;
         }
 
-        private void OnBtnEntrarClicked(object? sender, RoutedEventArgs e)
+        try
         {
-            var txtUsuario = this.FindControl<TextBox>("TxtUsuario");
-            var txtSenha = this.FindControl<TextBox>("TxtSenha");
-            var lblErro = this.FindControl<TextBlock>("LblErro");
-
-            string usuario = txtUsuario?.Text?.Trim() ?? string.Empty;
-            string senha = txtSenha?.Text ?? string.Empty;
-
-            // Validação dos campos vazios
-            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(senha))
+            using (var conexao = new MySqlConnection(ConexaoString))
             {
-                ExibirErro(lblErro, "Preencha todos os campos para continuar.");
-                return;
-            }
+                conexao.Open();
 
-            // String de ligação com o MySQL
-            string conexaoString = "Server=localhost;Database=incubadora_db;Uid=root;Pwd=IsaKellY1971;";
+                string query = @"SELECT nome, papel 
+                                 FROM utilizadores 
+                                 WHERE (nome = @u OR email = @u) 
+                                   AND credenciais_hash = @s 
+                                   AND ativo = 1 
+                                 LIMIT 1";
 
-            try
-            {
-                using (var conexao = new MySqlConnection(conexaoString))
+                using (var comando = new MySqlCommand(query, conexao))
                 {
-                    conexao.Open();
+                    comando.Parameters.AddWithValue("@u", usuario);
+                    comando.Parameters.AddWithValue("@s", senha);
 
-                    // Consulta que valida utilizador/email, senha e estado ativo
-                    string query = @"SELECT nome, papel 
-                                     FROM utilizadores 
-                                     WHERE (nome = @u OR email = @u) 
-                                       AND credenciais_hash = @s 
-                                       AND ativo = 1 
-                                     LIMIT 1";
-
-                    using (var comando = new MySqlCommand(query, conexao))
+                    using (var reader = comando.ExecuteReader())
                     {
-                        comando.Parameters.AddWithValue("@u", usuario);
-                        comando.Parameters.AddWithValue("@s", senha);
-
-                        using (var reader = comando.ExecuteReader())
+                        if (reader.Read())
                         {
-                            if (reader.Read())
-                            {
-                                string nomeEncontrado = reader.GetString("nome");
+                            string nomeEncontrado = reader.GetString("nome");
 
-                                if (lblErro != null)
-                                    lblErro.IsVisible = false;
+                            if (lblErro != null)
+                                lblErro.IsVisible = false;
 
-                                if (TopLevel.GetTopLevel(this) is Window window)
-                                {
-                                    window.Content = new MainView(nomeEncontrado);
-                                }
-                            }
-                            else
+                            // Suporte para Desktop (Window) e Mobile (ContentControl)
+                            var topLevel = TopLevel.GetTopLevel(this);
+                            if (topLevel is Window window)
                             {
-                                ExibirErro(lblErro, "Utilizador ou palavra-passe incorretos.");
+                                window.Content = new MainView(nomeEncontrado);
                             }
+                            else if (this.Parent is ContentControl parentControl)
+                            {
+                                parentControl.Content = new MainView(nomeEncontrado);
+                            }
+                        }
+                        else
+                        {
+                            ExibirErro(lblErro, "Utilizador ou palavra-passe incorretos.");
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                ExibirErro(lblErro, $"Erro ao ligar à base de dados: {ex.Message}");
-            }
         }
-
-        // Método auxiliar para exibir a mensagem de erro no TextBlock LblErro
-        private void ExibirErro(TextBlock? lblErro, string mensagem)
+        catch (Exception ex)
         {
-            if (lblErro != null)
-            {
-                lblErro.Text = mensagem;
-                lblErro.IsVisible = true;
-            }
+            ExibirErro(lblErro, $"Erro ao ligar à base de dados: {ex.Message}");
+        }
+    }
+
+    private void ExibirErro(TextBlock? lblErro, string mensagem)
+    {
+        if (lblErro != null)
+        {
+            lblErro.Text = mensagem;
+            lblErro.IsVisible = true;
         }
     }
 }

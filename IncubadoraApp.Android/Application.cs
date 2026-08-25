@@ -1,21 +1,14 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Runtime;
-using Avalonia;
-using Avalonia.Android;
 
-namespace IncubadoraApp.Android
+namespace IncubadoraApp.Android;
+
+[Application]
+public class MainApplication : Application
 {
-    [Application]
-    public class Application : AvaloniaAndroidApplication<App>
+    public MainApplication(IntPtr handle, JniHandleOwnership transfer)
+        : base(handle, transfer)
     {
-        protected Application(nint javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-        {
-        }
-
-        protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
-        {
-            return base.CustomizeAppBuilder(builder)
-            .WithInterFont();
-        }
     }
 }
