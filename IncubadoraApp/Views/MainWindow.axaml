@@ -6,7 +6,7 @@
         xmlns:views="using:IncubadoraApp.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="IncubadoraApp.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/Logo23.ico"
         Title="IncubadoraApp">
         <views:LoginView />
 </Window>
