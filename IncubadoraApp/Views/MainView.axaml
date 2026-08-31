@@ -10,7 +10,7 @@
             <Border Background="#1E293B"
                     CornerRadius="10"
                     Padding="15">
-                <Grid ColumnDefinitions="*,Auto,Auto">
+                <Grid ColumnDefinitions="*,Auto,Auto,Auto">
                     <StackPanel Grid.Column="0" Spacing="2">
                         <TextBlock Text="Sistema de Incubação Inteligente"
                                    Foreground="#94A3B8"
@@ -23,6 +23,16 @@
                     </StackPanel>
 
                     <Button Grid.Column="1"
+                            x:Name="BtnAtualizar"
+                            Content="Atualizar"
+                            Background="#0D9488"
+                            Foreground="White"
+                            FontSize="12"
+                            Padding="10,6"
+                            CornerRadius="6"
+                            Margin="0,0,10,0"/>
+
+                    <Button Grid.Column="2"
                             x:Name="BtnAlternarModo"
                             Content="Alternar Modo"
                             Background="#334155"
@@ -30,7 +40,7 @@
                             FontSize="12"
                             Margin="0,0,10,0"/>
 
-                    <Button Grid.Column="2"
+                    <Button Grid.Column="3"
                             x:Name="BtnSair"
                             Content="Sair"
                             Background="#EF4444"
@@ -40,6 +50,13 @@
                             CornerRadius="6"/>
                 </Grid>
             </Border>
+
+            <!-- Linha de estado: mostra progresso, hora da última atualização ou erros de ligação -->
+            <TextBlock x:Name="LblStatus"
+                       Text="A carregar dados..."
+                       FontSize="11"
+                       Foreground="#64748B"
+                       HorizontalAlignment="Right"/>
 
             <!-- Painel de Telemetria Atual (Sensores do ESP32) -->
             <Grid ColumnDefinitions="*,*,*" Margin="0,5">

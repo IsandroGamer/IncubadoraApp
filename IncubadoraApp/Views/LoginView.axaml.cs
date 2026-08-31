@@ -8,8 +8,16 @@ namespace IncubadoraApp.Views;
 
 public partial class LoginView : UserControl
 {
-    private const string ConexaoString = "Server=192.168.1.213;Database=incubadora_db;Uid=root;Pwd=IsaKellY1971;SslMode=Disabled;AllowPublicKeyRetrieval=True;";
-
+    // private const string ConexaoString = "Server=192.168.1.212;Database=incubadora_db;Uid=root;Pwd=IsaKellY1971;SslMode=Disabled;AllowPublicKeyRetrieval=True;";
+    private const string ConexaoString =
+    "Server=192.168.1.212;" +
+    "Port=3306;" +
+    "Database=incubadora_db;" +
+    "Uid=Isandro;" +
+    "Pwd=1234;" +
+    "SslMode=Disabled;" +
+    "AllowPublicKeyRetrieval=True;" +
+    "ConnectionTimeout=10;";
     public LoginView()
     {
         InitializeComponent();
